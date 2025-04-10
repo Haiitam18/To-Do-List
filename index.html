@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Task Board</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Task Board</h1>
+      <div class="subtitle">Organize your work efficiently</div>
+    </header>
+
+    <div class="board">
+      <div class="column todo" id="todo-column">
+        <div class="column-header">
+          <div class="column-title">To Do</div>
+          <div class="badge" id="badge"><strong>0</strong></div>
+        </div>
+      </div>
+
+      <div class="column in-progress">
+        <div class="column-header">
+          <div class="column-title">In Progress</div>
+          <div class="badge" id="badge"><strong>0</strong></div>
+        </div>
+      </div>
+
+      <div class="column done">
+        <div class="column-header">
+          <div class="column-title">Done</div>
+          <div class="badge" id="badge"><strong>0</strong></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navbar">
+      <div class="nav-title">Your Tasks</div>
+      <button class="add-btn" id="add-btn">
+        <span class="add-icon">+</span> Add Task
+      </button>
+    </div>
+
+    <!-- Popup html hidden -->
+    <div class="popup-overlay" id="taskPopup">
+      <div class="popup">
+        <div class="popup-header">
+          <h3 class="popup-title">Add New Task</h3>
+          <button class="popup-close"></button>
+        </div>
+        <div class="popup-body">
+          <form id="addTaskForm">
+            <div class="form-group">
+              <label for="taskTitle" class="form-label">Task Title</label>
+              <input
+                type="text"
+                id="taskTitle"
+                class="form-input"
+                placeholder="Enter task title"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="taskDescription" class="form-label"
+                >Description</label
+              >
+              <textarea
+                id="taskDescription"
+                class="form-input form-textarea"
+                placeholder="Enter task description"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Priority</label>
+              <div class="priority-options">
+                <label class="priority-option">
+                  <input
+                    type="radio"
+                    name="priority"
+                    value="low"
+                    class="priority-radio"
+                    id="priorityLow"
+                  />
+                  <span class="priority-circle priority-low"></span>
+                  <span class="priority-label">Low Priority</span>
+                </label>
+
+                <label class="priority-option">
+                  <input
+                    type="radio"
+                    name="priority"
+                    value="medium"
+                    class="priority-radio"
+                    id="priorityMedium"
+                    checked
+                  />
+                  <span class="priority-circle priority-medium"></span>
+                  <span class="priority-label">Medium Priority</span>
+                </label>
+
+                <label class="priority-option">
+                  <input
+                    type="radio"
+                    name="priority"
+                    value="high"
+                    class="priority-radio"
+                    id="priorityHigh"
+                  />
+                  <span class="priority-circle priority-high"></span>
+                  <span class="priority-label">High Priority</span>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="popup-footer">
+          <button class="btn btn-cancel" id="popup-btn-cancel">Cancel</button>
+          <button class="btn btn-add" id="popup-btn-add">Add Task</button>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js" defer></script>
+  </body>
+</html>
