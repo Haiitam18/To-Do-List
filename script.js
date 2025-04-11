@@ -12,6 +12,7 @@ cancelPopupButton.addEventListener("click", function () {
   popupOveray.classList.remove("active");
 });
 
+let taskIdCounter = 1;
 // To add task to do column
 const popAddTaskBtn = document.getElementById("popup-btn-add");
 popAddTaskBtn.addEventListener("click", function () {
@@ -22,7 +23,9 @@ popAddTaskBtn.addEventListener("click", function () {
 
   const newTask = document.createElement("div");
   newTask.classList.add("task");
-  newTask.id = "task";
+  newTask.id = "task" + taskIdCounter;
+  taskIdCounter++;
+  newTask.setAttribute("draggable", "true");
 
   const taskTitleIdDiv = document.createElement("div");
   taskTitleIdDiv.classList.add("task-title-id");
@@ -36,7 +39,6 @@ popAddTaskBtn.addEventListener("click", function () {
 
   deleteButtonDiv.classList.add("delete-button-div");
   deleteButton.classList.add("delete-button");
-  deleteButton.id = "delete-task";
   deleteButton.innerHTML = "<strong>X</strong>";
 
   const taskDescDiv = document.createElement("div");
@@ -81,6 +83,7 @@ popAddTaskBtn.addEventListener("click", function () {
 
   defaultPopup();
   countActiveTabs();
+  newTask.addEventListener("dragstart", dragstartHandler);
 });
 
 // Set to defaut the popup title / description
@@ -93,19 +96,59 @@ function defaultPopup() {
 }
 
 // To delete a task by clicking on the delete button
-const todoColumn = document.getElementById("todo-column");
-todoColumn.addEventListener("click", function (e) {
-  if (e.target && e.target.classList.contains("delete-button")) {
+document.addEventListener("click", function (e) {
+  console.log("buton clicked");
+  if (e.target && e.target.closest(".delete-button")) {
     e.target.closest(".task").remove();
+    console.log("buton deleted");
     countActiveTabs();
   }
 });
 
 // Count active task in the column
 function countActiveTabs() {
-  const badgeNumber = document.getElementById("badge");
+  const badge1 = document.getElementById("badge1");
+  const badge2 = document.getElementById("badge2");
+  const badge3 = document.getElementById("badge3");
+
+  // Count active task to do column
   const todoColumn = document.getElementById("todo-column");
-  const activeTask = todoColumn.querySelectorAll(".task");
-  badgeNumber.textContent = activeTask.length;
-  badgeNumber.style.fontWeight = "bold";
+  const todoTask = todoColumn.querySelectorAll(".task");
+  badge1.textContent = todoTask.length;
+  badge1.style.fontWeight = "bold";
+
+  // Count active task in progress column
+
+  const progressColumn = document.getElementById("column-in-progress");
+  const progressTask = progressColumn.querySelectorAll(".task");
+  badge2.textContent = progressTask.length;
+  badge2.style.fontWeight = "bold";
+
+  // Count active task done column
+  const doneColumn = document.getElementById("column-done");
+  const doneTask = doneColumn.querySelectorAll(".task");
+  badge3.textContent = doneTask.length;
+  badge3.style.fontWeight = "bold";
+}
+
+// Drag & drop section
+function dragstartHandler(ev) {
+  ev.dataTransfer.setData("text/plain", ev.target.id);
+}
+function dragoverHandler(ev) {
+  ev.preventDefault();
+  ev.dataTransfer.dropEffect = "move";
+}
+
+function dropHandler(ev) {
+  ev.preventDefault();
+
+  const taskId = ev.dataTransfer.getData("text/plain");
+
+  const taskElement = document.getElementById(taskId);
+  const dropTargetColumn = ev.target.closest(".column");
+
+  dropTargetColumn.appendChild(taskElement);
+
+  countActiveTabs();
 }

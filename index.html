@@ -16,21 +16,31 @@
       <div class="column todo" id="todo-column">
         <div class="column-header">
           <div class="column-title">To Do</div>
-          <div class="badge" id="badge"><strong>0</strong></div>
+          <div class="badge" id="badge1"><strong>0</strong></div>
         </div>
       </div>
 
-      <div class="column in-progress">
+      <div
+        class="column in-progress"
+        id="column-in-progress"
+        ondrop="dropHandler(event)"
+        ondragover="dragoverHandler(event)"
+      >
         <div class="column-header">
           <div class="column-title">In Progress</div>
-          <div class="badge" id="badge"><strong>0</strong></div>
+          <div class="badge" id="badge2"><strong>0</strong></div>
         </div>
       </div>
 
-      <div class="column done">
+      <div
+        class="column done"
+        id="column-done"
+        ondrop="dropHandler(event)"
+        ondragover="dragoverHandler(event)"
+      >
         <div class="column-header">
           <div class="column-title">Done</div>
-          <div class="badge" id="badge"><strong>0</strong></div>
+          <div class="badge" id="badge3"><strong>0</strong></div>
         </div>
       </div>
     </div>
