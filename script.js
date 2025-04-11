@@ -97,10 +97,8 @@ function defaultPopup() {
 
 // To delete a task by clicking on the delete button
 document.addEventListener("click", function (e) {
-  console.log("buton clicked");
   if (e.target && e.target.closest(".delete-button")) {
     e.target.closest(".task").remove();
-    console.log("buton deleted");
     countActiveTabs();
   }
 });
